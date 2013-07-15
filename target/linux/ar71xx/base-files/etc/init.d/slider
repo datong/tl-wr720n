@@ -1,0 +1,21 @@
+TART=22
+boot() {
+if grep -qe "sw2.*in  hi" /sys/kernel/debug/gpio ; then
+if grep -qe "sw1.*in  hi" /sys/kernel/debug/gpio ; then
+# AP
+logger "usb-tethering on"
+/sbin/usb-tethering on
+/sbin/wireless-turn on
+else
+# Router
+logger "wireless on"
+/sbin/usb-tethering on
+/sbin/wireless-turn on
+fi
+else
+# 3G
+logger "usb-tethering off and wireless on"
+/sbin/usb-tethering off
+/sbin/wireless-turn on
+fi
+}

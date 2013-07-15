@@ -1,0 +1,24 @@
+#!/bin/sh
+
+if [ $ACTION == "released" ] ; then
+if [ $BUTTON == "BTN_1" ] ; then
+# 3G
+logger "usb-tethering off and wireless on"
+/sbin/usb-tethering off
+/sbin/wireless-turn on
+elif [ $BUTTON == "BTN_0" ] ; then
+# Router
+logger "wireless on"
+/sbin/usb-tethering on
+/sbin/wireless-turn on
+fi
+elif [ $BUTTON == "BTN_0" ] || [ $BUTTON == "BTN_1" ] ; then
+# AP
+if grep -qe "sw1.*in  hi" /sys/kernel/debug/gpio ; then
+if grep -qe "sw2.*in  hi" /sys/kernel/debug/gpio ; then
+logger "usb-tethering on"
+/sbin/usb-tethering on
+/sbin/wireless-turn on
+fi
+fi
+fi

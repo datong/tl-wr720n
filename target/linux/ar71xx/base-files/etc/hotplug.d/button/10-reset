@@ -1,0 +1,10 @@
+#!/bin/sh
+
+[ "$BUTTON" = "reset" ] && [ "$ACTION" = "pressed" ] && {
+sleep 30 && echo timer > /sys/class/leds/tp-link:blue:system/trigger &&
+echo 100 > /sys/class/leds/tp-link:blue:system/delay_on &&
+echo 100 > /sys/class/leds/tp-link:blue:system/delay_off &&
+sleep 3 &&
+echo 0 > /sys/class/leds/tp-link:blue:system/brightness &&
+echo 1 > /sys/class/leds/tp-link:blue:system/brightness &
+}

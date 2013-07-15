@@ -1,0 +1,19 @@
+config system
+	option zonename 'Asia/Shanghai'
+	option timezone 'CST-8'
+	option hostname 'Predator'
+	option conloglevel '8'
+	option cronloglevel '8'
+
+config timeserver 'ntp'
+	option enable_server '0'
+	list server 'ntp.api.bz'
+	list server '1.openwrt.pool.ntp.org'
+
+config button
+	option button 'reset'
+	option action 'released'
+	option handler 'firstboot && reboot -f'
+	option min '30'
+	option max '60'
+
